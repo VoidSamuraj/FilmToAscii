@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Video.jar" size="22986" download="eager" />
+    <jar href="Video.jar" size="23976" download="eager" />
     <jar href="lib\jave-1.0.2.jar" size="5868832" download="eager" />
     <jar href="lib\jcodec-javase-0.2.5-javadoc.jar" size="82593" download="eager" />
     <jar href="lib\jcodec-javase-0.2.5-sources.jar" size="10389" download="eager" />
