@@ -4,11 +4,15 @@ import com.sun.javaws.Main;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.ObservableMap;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.WritableImage;
@@ -35,10 +39,25 @@ public class VideoToImages {
     static int liczba = 0;
     public static String saveDir;
     static ImagesToVideo vidSaver;
-
+    
+    static String testSource;
+    static int [] params=new int[3];
+    static int type=-1;
+    static boolean color;
+    public static void setPrefx(int[] parameters, int typ, boolean c)
+    {
+        params=parameters;
+        type=typ;
+        color=c;
+    }
     public static ImagesToVideo getVidSaver() {
         return vidSaver;
     }
+
+    public VideoToImages() {
+        type=-1;
+    }
+    
 
     public static void start(Stage primaryStage, String source, String output, ProgressBar pb) {
         liczba = 0;
@@ -52,7 +71,7 @@ public class VideoToImages {
         StackPane root = new StackPane();
         root.getChildren().add(mv);
 
-        final Scene scene = new Scene(root, 960, 540);
+        final Scene scene = new Scene(root, 960, 540);                                              //wymiarvid
         scene.setFill(Color.BLACK);
 
         primaryStage.setScene(scene);
@@ -61,7 +80,7 @@ public class VideoToImages {
 
         mp.setMute(true);
         mp.setRate(rate);
-
+   
         mp.play();
         File fd = new File(saveDir + "\\xd");
         fd.mkdirs();
@@ -94,31 +113,59 @@ public class VideoToImages {
         });
 
         mp.play();
-        mp.setOnEndOfMedia(() -> {
-
+        mp.setOnEndOfMedia(() -> {                                                                          //zmiana na wybor
+            
             primaryStage.hide();
             Stage st = new Stage();
-            AsciiSettings as = null;
-            try {
-                as = new AsciiSettings(st, saveDir + "\\xd");
+            //AsciiSettings as = null;
+            testSource=saveDir+"\\xd";
+            /*try {
+            as = new AsciiSettings(st, saveDir + "\\xd");
             } catch (IOException ex) {
-                Logger.getLogger(VideoToImages.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VideoToImages.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
+        
+                FXMLLoader load=new FXMLLoader();
+                load.setLocation(VideoToImages.class.getClassLoader().getResource("javafxapplication3/styl.fxml"));
+                //  System.out.println(VideoToImages.class.getClassLoader().getResource("javafxapplication3/styl.fxml"));
+                Parent settingsRoot = null;
+                try {
+                    settingsRoot = load.load(); //(new URL("\\javafxapplication3\\styl.fxml"));
+                    //primaryStage.getClass().getResource("\\javafxapplication3\\styl.fxml")); ///                                       problem
+                    // FXMLLoader.lo
+                    // primaryStage.getOwner().getc
+                } catch (IOException ex) {
+                    Logger.getLogger(VideoToImages.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                Scene scena2 = new Scene(settingsRoot, 1250, 700);
+                
+                
+                primaryStage.setScene(scena2);
+                primaryStage.show();
+            
 
-            Task ta = process((int) as.getSb(), as.getCkolor());
+            Task ta = process();
             Thread tp = new Thread(ta);
-
             pb.progressProperty().bind(ta.progressProperty());
             tp.start();
         });
     }
-
-    public static Task process(int fsize, boolean color) {
+    public void starnSettings(Scene stage){
+    
+    }
+    public static Task process() {
 
         return new Task() {
             @Override
-            protected Object call() throws Exception {
-
+            protected Object call(){
+                while (type==-1){try {
+                    Thread.sleep(2000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(VideoToImages.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+}
                 File fd = new File(saveDir + "\\xd");
                 vidSaver = new ImagesToVideo(saveDir, licz, klatka);
 
@@ -128,7 +175,24 @@ public class VideoToImages {
                     try {
                         pro++;
                         BufferedImage tempImg = ImageIO.read(fi);
-                        tempImg = ImageToAscii.CharToIMG4(tempImg, color, fsize - 3, fsize - 3, fsize);
+                        switch(type){
+                            case 1:
+                                tempImg=ImageToAscii.CharToIMG4(tempImg, color, params[0] - 3, params[0] - 3, params[0]);
+                                break;
+                            case 2:
+                                tempImg=ImageToAscii.imageToDots(tempImg, params[0], color);
+                                break;
+                            case 3:
+                                tempImg=ImageToAscii.curvedLines(tempImg, params[0], params[1]);
+                                break;
+                            case 4:
+                                tempImg=ImageToAscii.curvedRound(tempImg, params[0], params[1], params[2]);
+                                break;
+                            case 5:
+                                tempImg=ImageToAscii.imageToLine(tempImg, params[0]);
+                                break;
+                        }
+                      //  tempImg = ImageToAscii.CharToIMG4(tempImg, color, fsize - 3, fsize - 3, fsize);
                         //System.out.println(".call()");
                         //tempImg = ImageToAscii.curvedRound(tempImg,12,1.2,4);
                        // tempImg = ImageToAscii.curvedLines(tempImg, 4, 16);

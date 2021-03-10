@@ -45,22 +45,23 @@ public class ImagesToVideo implements Runnable {
         f.createNewFile();
         IMediaWriter writer = ToolFactory.makeWriter(f.getAbsolutePath());
         Dimension screenBounds = Toolkit.getDefaultToolkit().getScreenSize();
-        writer.addVideoStream(0, 0, ICodec.ID.CODEC_ID_MPEG4, screenBounds.width / 2, screenBounds.height / 2);
+        writer.addVideoStream(0, 0, ICodec.ID.CODEC_ID_MPEG4, screenBounds.width , screenBounds.height );
         
         for (int index = 0; index <= dur - 1; index++) {
-            System.err.println(dur);
+            
             System.out.println(index);
             BufferedImage screen = null;
+            File fi = null;
             try {
-                File fi = new File(outputFilename + "\\xd\\" + index + ".jpg");
+                fi = new File(outputFilename + "\\xd\\" + index + ".jpg");
                 screen = ImageIO.read(fi);
             } catch (IOException ex) {
                 Logger.getLogger(ImagesToVideo.class.getName()).log(Level.SEVERE, null, ex);
-                System.err.println(f.getAbsolutePath());
+                System.err.println(fi.getAbsolutePath());
             }
             BufferedImage bgrScreen = ImageToAscii.convertToType(screen, BufferedImage.TYPE_3BYTE_BGR);
-            writer.encodeVideo(0, bgrScreen, (long) (2 * 600 * klatka * index), TimeUnit.MILLISECONDS);
-            System.out.println(klatka);
+            writer.encodeVideo(0, bgrScreen, (long) (2* 600 * klatka * index), TimeUnit.MILLISECONDS);
+           
         }
         writer.close();
         System.out.println("Video Created");

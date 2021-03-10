@@ -36,6 +36,7 @@ public class FXMLDocumentController implements Initializable {
     public void selectSourcePath() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Wybierz wideo");
+        fileChooser.setInitialDirectory(new File("D:\\Pobrane\\dx"));                                       //tymczasowe
         source.setText(fileChooser.showOpenDialog(source.getScene().getWindow()).getAbsolutePath());
     }
 
@@ -43,9 +44,9 @@ public class FXMLDocumentController implements Initializable {
     public void selectSavePath() {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Wybierz katalog zapisu filmu");
-        chooser.setInitialDirectory(new JFileChooser().getFileSystemView().getDefaultDirectory());
-        File dir = chooser.showDialog(output.getScene().getWindow());
-
+      //  chooser.setInitialDirectory(new JFileChooser().getFileSystemView().getDefaultDirectory());
+       chooser.setInitialDirectory(new File("C:\\Users\\Karol\\Desktop\\xd"));  
+        File dir = chooser.showDialog(output.getScene().getWindow());                                        //tymczasowe
         output.setText(dir.getAbsolutePath());
     }
 

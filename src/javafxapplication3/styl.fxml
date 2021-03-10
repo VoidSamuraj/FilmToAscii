@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -12,57 +13,105 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1254.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication3.StylController">
    <children>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="724.0" prefWidth="1254.0">
+      <HBox layoutX="10.0" layoutY="10.0" prefWidth="1250.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="852.0" prefWidth="306.0">
+            <VBox alignment="TOP_CENTER" prefWidth="300.0">
                <children>
                   <Label alignment="CENTER" prefHeight="36.0" prefWidth="223.0" text="Wybierz styl" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="choice" prefHeight="42.0" prefWidth="306.0" />
-                  <VBox fx:id="styleSettings" alignment="TOP_CENTER" prefHeight="577.0" prefWidth="306.0">
+                  <ChoiceBox fx:id="choice" accessibleText="Style" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeBox" prefHeight="44.0" prefWidth="300.0">
+                     <padding>
+                        <Insets />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></ChoiceBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="300.0">
                      <children>
                         <Separator prefHeight="20.0" prefWidth="223.0" />
-                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="268.0" text="Rozdzielczość" textAlignment="CENTER">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Slider fx:id="resolution" blockIncrement="1.0" max="50.0" min="1.0" prefHeight="47.0" prefWidth="223.0" showTickLabels="true" showTickMarks="true" value="1.0" />
-                        <Label fx:id="resolutionLabel" alignment="CENTER" prefHeight="36.0" prefWidth="231.0" textAlignment="CENTER">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
+                        <HBox alignment="TOP_CENTER" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="pl1" alignment="CENTER" prefHeight="40.0" text="Rozdzielczość" textAlignment="CENTER" visible="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="pv1" contentDisplay="CENTER" disable="true" prefHeight="40.0" text="4" visible="false">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Slider fx:id="p1" blockIncrement="1.0" max="50.0" min="4.0" prefHeight="47.0" prefWidth="223.0" showTickLabels="true" showTickMarks="true" value="1.0" visible="false" />
+                        <HBox alignment="TOP_CENTER" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="pl2" alignment="CENTER" prefHeight="40.0" text="Rozdzielczość - X" textAlignment="CENTER" visible="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="pv2" contentDisplay="CENTER" disable="true" prefHeight="40.0" text="4" visible="false">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Slider fx:id="p2" blockIncrement="1.0" max="50.0" min="4.0" prefHeight="47.0" prefWidth="223.0" showTickLabels="true" showTickMarks="true" value="1.0" visible="false" />
+                        <HBox alignment="TOP_CENTER" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="pl3" alignment="CENTER" prefHeight="40.0" text="Rozdzielczość - Y" textAlignment="CENTER" visible="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="pv3" contentDisplay="CENTER" disable="true" prefHeight="40.0" text="4" visible="false">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Slider fx:id="p3" blockIncrement="1.0" max="50.0" min="4.0" prefHeight="47.0" prefWidth="223.0" showTickLabels="true" showTickMarks="true" value="1.0" visible="false" />
                      </children>
                   </VBox>
                   <Separator prefHeight="20.0" prefWidth="223.0" />
-                  <CheckBox fx:id="color" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="94.0" text="Kolor" textAlignment="CENTER">
+                  <CheckBox fx:id="color" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" text="Kolor" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <Separator prefHeight="29.0" prefWidth="306.0" />
-                  <Button fx:id="test" mnemonicParsing="false" prefHeight="44.0" prefWidth="305.0" text="Próba">
+                  <Separator prefHeight="30.0" prefWidth="306.0" />
+                  <Button fx:id="test" mnemonicParsing="false" onAction="#test" prefHeight="44.0" prefWidth="305.0" text="Próba">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Separator prefHeight="40.0" prefWidth="306.0" />
-                  <Button fx:id="ok" mnemonicParsing="false" prefHeight="46.0" prefWidth="306.0" text="OK">
+                  <Separator prefHeight="30.0" prefWidth="306.0" />
+                  <Button fx:id="ok" mnemonicParsing="false" onAction="#start" prefHeight="44.0" prefWidth="306.0" text="OK">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                </children>
             </VBox>
-            <Separator orientation="VERTICAL" prefHeight="880.0" prefWidth="15.0" visible="false" />
-            <ImageView fitHeight="873.0" fitWidth="925.0" pickOnBounds="true" preserveRatio="true" />
+            <Separator orientation="VERTICAL" prefWidth="15.0" visible="false" />
+            <ImageView fx:id="imv" fitHeight="700.0" fitWidth="925.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
    </children>

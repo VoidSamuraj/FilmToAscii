@@ -112,12 +112,11 @@ public class ImageToAscii {
         return image;
     }
     
-    public static BufferedImage imageToDots(BufferedImage bim,int size,boolean color)
+    public static BufferedImage imageToDots(BufferedImage img,int size,boolean color)
     {
         int p,r,g,b;
         float luminance=0;
-        BufferedImage img=bim;
-        BufferedImage bi =new BufferedImage(bim.getWidth(), bim.getHeight(), bim.getType());
+        BufferedImage bi =new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics graphics = bi.getGraphics();
         graphics.setColor(java.awt.Color.BLACK);                                                         //tło
         graphics.fillRect(0, 0,img.getWidth(), img.getHeight());
@@ -137,7 +136,7 @@ public class ImageToAscii {
                         if(img.getHeight()>(y+i)&&img.getWidth()>(x+j)){
                             
                             p=img.getRGB(j+x, i+y);
-                            if(color)graphics.setColor(new Color(p));
+                           // if(color)graphics.setColor(new Color(p));
                             r = (p>>16) & 0xff;
                             g = (p>>8) & 0xff;
                             b = p & 0xff;
@@ -166,12 +165,18 @@ public class ImageToAscii {
                             war=false;
                     }
                     mapa.put(xpos, ypos);
-                    if(img.getWidth()>(xpos+j)&&img.getHeight()>(ypos+i))
+                    if(img.getWidth()>(xpos+j)&&img.getHeight()>(ypos+i)){
+                        if(color){
+                         p=img.getRGB(xpos+j, ypos+i);
+                         graphics.setColor(new Color(p));
+                        }
                         graphics.fillRect(xpos+j, ypos+i, 1, 1);
+                    }
                 }
                 mapa.clear();
+                luminance=0;
             }
-            luminance=0;
+            
         }
         
         return bi;
@@ -182,7 +187,7 @@ public class ImageToAscii {
         int p,r,g,b;
         float luminance=0;
         BufferedImage img=srci;
-        BufferedImage bi=new BufferedImage( img.getWidth(),img.getHeight(),img.getType());
+        BufferedImage bi=new BufferedImage( img.getWidth(),img.getHeight(),BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d= bi.createGraphics();
         int max=scalex*scaley;
         int l;
@@ -260,7 +265,7 @@ public class ImageToAscii {
     public static BufferedImage curvedRound(BufferedImage img,int l,double skala,int odstep){
 
         QuadCurve2D q = new QuadCurve2D.Float();
-        BufferedImage bi=new BufferedImage( img.getWidth(),img.getHeight(),img.getType());
+        BufferedImage bi=new BufferedImage( img.getWidth(),img.getHeight(),BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d= bi.createGraphics();
         double skalaodstepu=skala;
         int przerwa=odstep;
@@ -380,7 +385,7 @@ public class ImageToAscii {
  
     
         
-            BufferedImage bi=new BufferedImage( img.getWidth(),img.getHeight(),img.getType()); 
+            BufferedImage bi=new BufferedImage( img.getWidth(),img.getHeight(),BufferedImage.TYPE_INT_RGB); 
             Graphics graphics = bi.getGraphics();    
              
             if(color)
