@@ -1,5 +1,5 @@
 # FilmToAscii
-Convert video to ascii video
+Convert video to ascii and few styles video
 
 Project under construction
 In future I'm planning also to add sound and gif version.
