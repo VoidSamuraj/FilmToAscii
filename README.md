@@ -1,7 +1,7 @@
-# FilmToAscii
+# FilmToAscii 
 Convert video to ascii and few styles video which can be adjust in preview view.
 You can change resolution and color option.
-
+This is old version. [new version](https://github.com/VoidSamuraj/VideoToStyles)
 
 
 ![test1](https://user-images.githubusercontent.com/49106260/150838344-60dc25aa-1d86-409f-a7cd-8f66ace4fccc.jpg)
